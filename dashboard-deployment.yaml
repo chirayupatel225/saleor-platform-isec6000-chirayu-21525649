@@ -29,7 +29,10 @@ spec:
         name: dashboard
         ports:
         - containerPort: 80
-        resources: {}
+        resources:
+          limits:
+            cpu: 250m
+            memory: "268435456"
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null

@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   api:
-    image: ghcr.io/saleor/saleor:3.20
+    image: ghcr.io/saleor/saleor:latest
     ports:
       - 8000:8000
     restart: unless-stopped
@@ -20,6 +20,11 @@ services:
     env_file:
       - common.env
       - backend.env
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
     environment:
       - JAEGER_AGENT_HOST=jaeger
       - DASHBOARD_URL=http://localhost:9000/
@@ -27,6 +32,11 @@ services:
 
   dashboard:
     image: ghcr.io/saleor/saleor-dashboard:latest
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
     ports:
       - 9002:80
     restart: unless-stopped
@@ -41,12 +51,22 @@ services:
     volumes:
       - saleor-db:/var/lib/postgresql/data
       - ./replica_user.sql:/docker-entrypoint-initdb.d/replica_user.sql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
     environment:
       - POSTGRES_USER=saleor
       - POSTGRES_PASSWORD=saleor
 
   redis:
     image: library/redis:7.0-alpine
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
     ports:
       - 6379:6379
     restart: unless-stopped
@@ -56,7 +76,7 @@ services:
       - saleor-redis:/data
 
   worker:
-    image: ghcr.io/saleor/saleor:3.20
+    image: ghcr.io/saleor/saleor:latest
     command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B
     restart: unless-stopped
     networks:
@@ -67,12 +87,22 @@ services:
     depends_on:
       - redis
       - mailpit
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
     volumes:
       # shared volume between worker and api for media
       - saleor-media:/app/media
 
   jaeger:
     image: jaegertracing/all-in-one
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
     ports:
       - "5775:5775/udp"
       - "6831:6831/udp"
@@ -90,6 +120,11 @@ services:
 
   mailpit:
     image: axllent/mailpit
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
     ports:
       - 1025:1025 # smtp server
       - 8025:8025 # web ui. Visit http://localhost:8025/ to check emails

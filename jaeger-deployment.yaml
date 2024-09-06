@@ -40,7 +40,10 @@ spec:
         - containerPort: 16686
         - containerPort: 14268
         - containerPort: 9411
-        resources: {}
+        resources:
+          limits:
+            cpu: 250m
+            memory: "268435456"
         volumeMounts:
         - mountPath: /tmp
           name: jaeger-claim0

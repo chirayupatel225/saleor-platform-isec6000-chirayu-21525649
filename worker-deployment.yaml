@@ -75,10 +75,13 @@ spec:
             configMapKeyRef:
               key: SECRET_KEY
               name: backend-env
-        image: ghcr.io/saleor/saleor:3.20
+        image: ghcr.io/saleor/saleor:latest
         imagePullPolicy: ""
         name: worker
-        resources: {}
+        resources:
+          limits:
+            cpu: 250m
+            memory: "268435456"
         volumeMounts:
         - mountPath: /app/media
           name: saleor-media

@@ -1,3 +1,24 @@
+# ISEC6000-SecureDevOps-21525649
+ISEC6000 Secure DevOps Forked Saleor Repository Chirayu Patel 21525649
+
+# ******************\_\_\_\_******************
+
+# ISEC6000 Secure DevOps Assessment 1
+
+# ******************\_\_\_\_******************
+
+##Assessment 1 Forked Saleor Repository README File
+
+Submitted in partial fulfilment of the requirements of ISEC6000 Secure DevOps Unit
+
+### STUDENT NAME - Chirayu Satishkumar Patel
+
+### STUDENT ID - 21525649
+
+
+Curtin University
+September 5, 2024
+
 ![Saleor Platform](https://user-images.githubusercontent.com/249912/71523206-4e45f800-28c8-11ea-84ba-345a9bfc998a.png)
 
 <div align="center">

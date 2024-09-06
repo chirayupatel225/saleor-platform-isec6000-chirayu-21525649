@@ -31,7 +31,10 @@ spec:
         ports:
         - containerPort: 1025
         - containerPort: 8025
-        resources: {}
+        resources:
+          limits:
+            cpu: 250m
+            memory: "268435456"
       restartPolicy: Always
       serviceAccountName: ""
       volumes: null
